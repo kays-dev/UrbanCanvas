@@ -1,0 +1,7 @@
+### SwiftPackageManager ###
+Packages
+.DS_Store
+DerivedData/
+xcuserdata/
+*.xcuserstate
+build/
