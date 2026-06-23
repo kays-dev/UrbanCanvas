@@ -43,7 +43,6 @@ struct ArtworksListView: View {
                     }
                     .navigationDestination(for: StreetArt.self){ artwork in
                         ArtworksDetailsView(artwork: artwork)
-                        
                     }
                     .listStyle(.plain)
                     .scrollIndicators(.hidden)
@@ -67,14 +66,11 @@ struct ArtworksListView: View {
                             }
                         } message : {
                             Text("Choisissez un type d’art")
-                        }.buttonStyle(MenuButton())
-
+                        }
                     }
                 }
             }
-            
         }
-        
     }
 }
 
