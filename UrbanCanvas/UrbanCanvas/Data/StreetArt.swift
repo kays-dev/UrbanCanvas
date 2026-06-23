@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 //Structure
 struct StreetArt : Identifiable, Hashable{
@@ -60,7 +61,7 @@ let artworks = [
         """, street: "Rue Saint-Médard / Rue Mouffetard", postCode: "75005", city: "Paris", lat: 48.8436, long: 2.3510, type: .mural, state: .perfect, author: "Seth", created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2021, month: 6)),
     StreetArt(name: "Chloé", picture: "chloe", detail: """
         Portrait au pochoir réalisé par C215 (Christian Guémy) dans le quartier du Panier. Fidèle à son style, l'artiste capture avec une précision photographique le regard d'une fillette, rendant hommage aux « invisibles » de la société. Les tons chauds et la flèche rouge signature de C215 contrastent avec la pierre blanche des ruelles marseillaises.
-        """, street: "Rue du Panier", postCode: "13002", city: "Marseille", lat: 43.2991, long: 5.3701, type: .stencil, state: .good, author: "C215", created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2019, month: 4)),
+        """, street: "Rue du Panier", postCode: "13002", city: "Marseille", lat: 43.2991, long: 5.3701, type: .stencil, state: .good, author: "Mahn Kloix", created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2019, month: 4)),
     StreetArt(name: "L'Éléphant de l'Île", picture: "elephant", detail: """
         Fresque murale en hommage aux Machines de l'Île, réalisée par Jef Aérosol à l'occasion du festival Estuaire. Un grand éléphant mécanique au pochoir noir et blanc arpente un pignon de l'île de Nantes, flèche rouge pointée vers la Loire.
         """, street: "Boulevard Léon Bureau", postCode: "44200", city: "Nantes", lat: 47.2065, long: -1.5601, type: .stencil, state: .good, author: "Jef Aérosol", created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2016, month: 8)),
@@ -80,3 +81,54 @@ let artworks = [
         Fresque murale réalisée par Satr (Deng Cunxin) sur un mur de la Friche la Belle de Mai. Un tigre de Sibérie se repose sous un pin tandis qu'une cigale provençale vole au-dessus de lui, dialogue poétique entre l'Orient et la Méditerranée. Peinte à la bombe aérosol lors d'une résidence artistique.
         """, street: "Friche la Belle de Mai, 41 Rue Jobin", postCode: "13003", city: "Marseille", lat: 43.3073, long: 5.3882, type: .mural, state: .good, author: "Satr", created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2022, month: 8))
 ]
+
+//Strutures des villes
+struct City : Identifiable {
+    let id = UUID()
+    
+    let name : String
+    let coordinates : CLLocationCoordinate2D
+}
+
+//Instances des Villes
+let cities = [
+    City(name: "Paris", coordinates: (CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522))),
+    City(name: "Lyon", coordinates: CLLocationCoordinate2D(latitude: 45.7640, longitude: 4.8357)),
+    City(name: "Marseille", coordinates: CLLocationCoordinate2D(latitude: 43.2965, longitude: 5.3698)),
+    City(name: "Nantes", coordinates: CLLocationCoordinate2D(latitude: 47.2184, longitude: 1.5536)),
+    City(name: "Lille", coordinates: CLLocationCoordinate2D(latitude: 50.6292, longitude: 3.0573)),
+]
+
+//Formattage de la date
+func getFrenchMonth(format : String) -> String {
+    
+    switch format {
+    case "Jan" :
+        return "Janvier"
+    case "Feb" :
+        return "Février"
+    case "Mar" :
+        return "Mars"
+    case "Apr" :
+        return "Avril"
+    case "May" :
+        return "Mai"
+    case "Jun" :
+        return "Juin"
+    case "Jul" :
+        return "Juillet"
+    case "Aug" :
+        return "Août"
+    case "Sep" :
+        return "Septembre"
+    case "Oct" :
+        return "Octobre"
+    case "Nov" :
+        return "Novembre"
+    case "Dec" :
+        return "Décembre"
+        
+    default:
+        return " "
+    }
+}

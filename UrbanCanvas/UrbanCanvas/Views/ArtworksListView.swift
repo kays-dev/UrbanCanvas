@@ -22,12 +22,13 @@ struct ArtworksListView: View {
                         .bold()
                         .foregroundStyle(.mainText)
                     
-                        List{
-                            ForEach(artworks){ artwork in
+                        List(artworks){ artwork in
                                 NavigationLink(value: artwork) {
                                     ArtworksCardView(artwork: artwork)
                                 }
-                            }
+                        }
+                        .navigationDestination(for: StreetArt.self){ artwork in
+                            ArtworksDetailsView(artwork: artwork)
                         }
                         .listStyle(.plain)
                         .scrollIndicators(.hidden)
