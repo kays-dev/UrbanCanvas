@@ -9,9 +9,7 @@ import SwiftUI
 
 struct ArtworksListView: View {
     @State private var selectedType : ArtType = .all
-    
     @State private var showDialog : Bool = false
-    
     @State private var filteredList : [StreetArt] = artworks.sorted{ $0.name.lowercased() < $1.name.lowercased() }
     
     private func filterArtworks(){
@@ -24,6 +22,8 @@ struct ArtworksListView: View {
         filteredList = list
     }
     
+    @State private var selectedView = "Liste"
+    
     var body: some View {
         NavigationStack{
             ZStack{
@@ -35,6 +35,7 @@ struct ArtworksListView: View {
                         .font(.largeTitle)
                         .bold()
                         .foregroundStyle(.mainText)
+                        .padding(.top)
                     
                     List(filteredList){ artwork in
                         NavigationLink(value: artwork) {
@@ -68,7 +69,50 @@ struct ArtworksListView: View {
                             Text("Choisissez un type d’art")
                         }
                     }
+                    
+                    ToolbarItem(placement: .topBarLeading) {
+                        //                        Picker("Vue", selection: $selectedView) {
+                        //                                Text("Liste").tag("Liste")
+                        //                                    .background{
+                        //                                        Capsule()
+                        //                                            .fill(selectedView == "Liste" ? .secondOrange  : .white)
+                        //                                    }
+                        //                                    .glassEffect(.regular.tint(.orange).interactive())
+                        //
+                        //                                Text("Carte").tag("Carte")
+                        //                                    .background{
+                        //                                        Capsule()
+                        //                                            .fill(selectedView == "Liste" ? .secondOrange  : .white)
+                        //                                    }
+                        
+                        HStack(spacing: -4){
+                            Button("Liste"){
+                                selectedView = "Liste"
+                            }
+                            .padding(.horizontal, 48)
+                            .background{
+                                Capsule()
+                                    .fill(selectedView == "Liste" ? .secondOrange  : .white)
+                            }
+                            
+                            
+                            Button("Carte"){
+                                selectedView = "Carte"
+                            }
+                            .padding(.horizontal, 48)
+                            .background{
+                                Capsule()
+                                    .fill(selectedView == "Carte" ? .secondOrange : .white.opacity(0))
+                            }
+                        }
+                        .font(.caption)
+                        .bold()
+                        //                        }
+                        //                        .pickerStyle(.segmented)
+                        //                        .fixedSize()
+                    }
                 }
+                
             }
         }
     }
