@@ -37,6 +37,7 @@ struct ArtworkMap: View {
         }
         .clipShape(RoundedRectangle(cornerRadius: 28))
         .frame(height: 158)
+        .allowsHitTesting(false)
         .onAppear{
             position =
             MapCameraPosition.region(

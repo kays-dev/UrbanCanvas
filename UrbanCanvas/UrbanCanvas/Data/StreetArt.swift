@@ -91,13 +91,14 @@ struct City : Identifiable {
 }
 
 //Instances des Villes
-let cities = [
-    City(name: "Paris", coordinates: (CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522))),
-    City(name: "Lyon", coordinates: CLLocationCoordinate2D(latitude: 45.7640, longitude: 4.8357)),
-    City(name: "Marseille", coordinates: CLLocationCoordinate2D(latitude: 43.2965, longitude: 5.3698)),
-    City(name: "Nantes", coordinates: CLLocationCoordinate2D(latitude: 47.2184, longitude: 1.5536)),
-    City(name: "Lille", coordinates: CLLocationCoordinate2D(latitude: 50.6292, longitude: 3.0573)),
-]
+
+let paris = City(name: "Paris", coordinates: (CLLocationCoordinate2D(latitude: 48.8566, longitude: 2.3522)))
+let lyon =    City(name: "Lyon", coordinates: CLLocationCoordinate2D(latitude: 45.7640, longitude: 4.8357))
+let marseille = City(name: "Marseille", coordinates: CLLocationCoordinate2D(latitude: 43.2965, longitude: 5.3698))
+let nantes = City(name: "Nantes", coordinates: CLLocationCoordinate2D(latitude: 47.2184, longitude: 1.5536))
+let lille =  City(name: "Lille", coordinates: CLLocationCoordinate2D(latitude: 50.6292, longitude: 3.0573))
+
+let cities = [paris, lyon, marseille, nantes, lille]
 
 //Formattage de la date
 func getFrenchMonth(format : String) -> String {
