@@ -31,8 +31,6 @@ struct ArtworksListView: View {
             .scrollIndicators(.hidden)
             .mask(RoundedRectangle(cornerRadius: 28))
             
-            Spacer()
-            
         }
         .padding(.horizontal, 24)
     }

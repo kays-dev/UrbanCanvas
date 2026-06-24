@@ -25,84 +25,86 @@ struct ArtworksDetailsView: View {
     }
     
     var body: some View {
-        VStack(spacing: 24){
-            VStack(alignment: .leading, spacing: 12){
-                Text(artwork.name)
-                    .font(.title2)
-                    .bold()
-                    .foregroundStyle(.accent)
-                
-                Text(artwork.detail)
-                    .multilineTextAlignment(.leading)
-                
-                VStack (alignment: .leading){
-                    Text(
+        ScrollView{
+            VStack(spacing: 24){
+                VStack(alignment: .leading, spacing: 12){
+                    Text(artwork.name)
+                        .font(.title2)
+                        .bold()
+                        .foregroundStyle(.accent)
+                    
+                    Text(artwork.detail)
+                        .multilineTextAlignment(.leading)
+                    
+                    VStack (alignment: .leading){
+                        Text(
                         """
                         \(Text("Type : ").bold())\
                         \(Text(artwork.type.rawValue))
                         """
-                    )
-                    
-                    Text(
+                        )
+                        
+                        Text(
                         """
                         \(Text("Condition : ").bold())\
                         \(Text(artwork.state.rawValue))
                         """
-                    )
-                    
-                    Text(
+                        )
+                        
+                        Text(
                         """
                         \(Text("Date : ").bold())\
                         \(Text(getToDateFormat(dateComp: artwork.created) ?? ""))
                         """
-                    )
-                    
-                    Text(
+                        )
+                        
+                        Text(
                         """
                         \(Text("Auteur : ").bold())\
                         \(Text(artwork.author))
                         """
-                    )
-                    
-                    Text(
+                        )
+                        
+                        Text(
                         """
                         \(Text("Localisation : ").bold())\
                         \(Text("\(artwork.street), \(artwork.postCode) \(artwork.city) (Latitude : \(artwork.lat.description), Longitude : \(artwork.long.description))"))
                         """
-                    )
-                    .multilineTextAlignment(.leading)
+                        )
+                        .multilineTextAlignment(.leading)
+                    }
                 }
+                .font(.footnote)
+                .padding(.top, 16)
+                
+                Spacer()
+                
             }
-            .font(.footnote)
-            .padding(.top, 16)
-            
-            Spacer()
-            
-        }
-        .padding(.horizontal, 24)
-        .safeAreaInset(edge: .top){
-            Image(artwork.picture)
-                .resizable()
-                .scaledToFill()
-                .frame(minWidth: 0,
-                       maxWidth: .infinity,
-                       maxHeight: 278
-                )
-                .clipped()
-                .opacity(0.6)
-        }
-        .safeAreaInset(edge: .bottom, content: {
-            VStack {
-            ArtworkMap(artwork: artwork)
-                    .padding(.bottom)
-            
-            Text("Image founie par")
-                    .font(.footnote)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-            }
-            .padding(.bottom, 44)
             .padding(.horizontal, 24)
-        })
+            .safeAreaInset(edge: .top){
+                Image(artwork.picture)
+                    .resizable()
+                    .scaledToFill()
+                    .frame(minWidth: 0,
+                           maxWidth: .infinity
+                    )
+                    .frame(height : 278)
+                    .clipped()
+            }
+            .safeAreaInset(edge: .bottom){
+                VStack {
+                    ArtworkMap(artwork: artwork)
+                        .padding(.bottom)
+                    
+                    Text("Image founie par")
+                        .font(.footnote)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .padding(.bottom, 44)
+                .padding(.horizontal, 24)
+            }
+        }
+        .scrollIndicators(.hidden)
         .foregroundStyle(.mainText)
         .ignoresSafeArea()
     }

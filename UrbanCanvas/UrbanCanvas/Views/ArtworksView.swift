@@ -33,7 +33,6 @@ struct ArtworksView: View {
                 } else {
                     ArtworksMapView(selectedType: $selectedType, showDialog: $showDialog, filteredList: $filteredList)
                 }
-                
             }
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -69,6 +68,7 @@ struct ArtworksView: View {
                             }
                     }
                     .pickerStyle(.segmented)
+                    .tint(.secondOrange)
                     .frame(width: 300)
                     .fixedSize()
                 }

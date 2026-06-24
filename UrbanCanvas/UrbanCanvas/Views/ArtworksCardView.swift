@@ -37,9 +37,7 @@ struct ArtworksCardView: View {
             
         }
         .foregroundStyle(.mainText)
-        .mask(RoundedRectangle(cornerRadius: 28))
-        
-        
+        .mask(RoundedRectangle(cornerRadius: 28))  
     }
 }
 
