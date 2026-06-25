@@ -30,6 +30,8 @@ struct ArtworksView: View {
                 if selectedView == "Liste" { ArtworksListView(selectedType: $selectedType, showDialog: $showDialog, filteredList: $filteredList)
                         .background(Color.bgGray
                             .ignoresSafeArea())
+                        .navigationTitle("Liste des Street arts")
+                        .navigationBarTitleDisplayMode(.automatic)
                 } else {
                     ArtworksMapView(selectedType: $selectedType, showDialog: $showDialog, filteredList: $filteredList)
                 }

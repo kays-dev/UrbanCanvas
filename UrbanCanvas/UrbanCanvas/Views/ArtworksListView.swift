@@ -14,11 +14,6 @@ struct ArtworksListView: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 24){
-            Text("Liste des Street arts")
-                .font(.largeTitle)
-                .bold()
-                .foregroundStyle(.mainText)
-            
             List(filteredList){ artwork in
                 NavigationLink(value: artwork) {
                     ArtworksCardView(artwork: artwork)
@@ -33,6 +28,7 @@ struct ArtworksListView: View {
             
         }
         .padding(.horizontal, 24)
+        .padding(.vertical, 20)
     }
 }
 
