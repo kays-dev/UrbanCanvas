@@ -27,6 +27,8 @@ struct StreetArt : Identifiable, Hashable{
     
     let author: String
     let created: DateComponents
+    
+    var discovered : Bool = false
 }
 
 //Enums
