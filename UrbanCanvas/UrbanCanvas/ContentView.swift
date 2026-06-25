@@ -9,7 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     var body: some View {
-        ArtworksView()
+        TabView{
+            Tab("Oeuvres", systemImage: "photo.artframe") {
+                ArtworksView()
+            }
+            
+            Tab("Auteurs", systemImage: "person.fill") {
+                AuthorsGridView()
+            }
+        }
+
     }
 }
 
