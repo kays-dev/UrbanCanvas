@@ -17,6 +17,10 @@ struct ContentView: View {
             Tab("Auteurs", systemImage: "person.fill") {
                 AuthorsGridView()
             }
+            
+            Tab("Missions", systemImage: "target") {
+                MissionsView()
+            }
         }
 
     }
