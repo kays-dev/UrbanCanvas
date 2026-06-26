@@ -12,10 +12,12 @@ struct MissionsView: View {
     @State private var missions : [StreetArt] = []
     
     @State private var showNoMissions : Bool = false
+    @State private var showSuccess  : Bool = false
     
     @State private var showSheet : Bool = false
-    @State private var selectedMission : StreetArt?
-    @Environment(\.dismiss) private var dismiss
+    @State private var selectedMission : StreetArt? = nil
+    
+    @State private var discovered : Int = 0
     
     private func getMissionNum(_ mission : StreetArt) -> Int{
         var index = 0
@@ -28,70 +30,96 @@ struct MissionsView: View {
     }
     
     private func generateMissions(){
-        var artworksList = artworks.filter{ !$0.discovered }
+        missions = []
+        discovered = 0
         
-        artworksList = artworksList.shuffled()
+        let artworksList = artworks.filter{ !$0.discovered }.shuffled()
         
-        let missionNumber = artworksList.count > 3 ? 5 : 3
-        var i = 0
+        if artworksList.count >= 3 {
+            showNoMissions = false
+        } else {
+            showNoMissions = true
+            return
+        }
         
-        while  i < missionNumber {
-            missions.append(artworksList.first(where : {!missions.contains($0) && !missions.map({$0.author}).contains($0.author)})!)
+        let missionNumber = min(artworksList.count >= 5 ? 5 : 3, artworksList.count)
+        
+        for artwork in artworksList{
+            guard missions.count < missionNumber else { break }
             
-            for artwork in missions {
-                if missions.filter({$0.type == artwork.type}).count > missionNumber - 1 {
-                    
-                    missions[i] = artworksList.first(where : {!missions.contains($0) && !missions.map({$0.author}).contains($0.author) && $0.type != artwork.type})!
-                    
-                } else {
-                    continue
-                }
+            let sameArtwork = missions.map{ $0 }.contains(artwork)
+            let sameAuthor = missions.map{ $0.author }.contains(artwork.author)
+            let sameType = missions.filter{ $0.type == artwork.type}.count >= 2
+            
+            if !sameArtwork && !sameAuthor && !sameType{
+                missions.append(artwork)
             }
-            i += 1
+        }
+        
+        if missions.isEmpty {
+            showNoMissions = true
         }
     }
     
     var body: some View {
         NavigationStack{
-            ScrollView{
-                VStack(spacing: 20){
-                    ForEach($missions){ $mission in
-                        MissionCard(cardIndex: getMissionNum(mission), artwork: $mission, selected: $selectedMission)
-                    }
-                }
-                .onChange(of: selectedMission) { oldvalue, newvalue in
-                    if newvalue == nil {
-                        showSheet = false
-                    } else {
-                        showSheet = true
-                    }
-                }
-                .padding()
-            }
-            .task{
-                generateMissions()
+            ScrollViewReader { topOfList in
                 
-                if missions.isEmpty {
-                    showNoMissions = true
+                ScrollView{
+                    VStack(spacing: 20){
+                        
+                        if missions.count != 0 {
+                            Text("\(discovered) \(discovered > 1 ? "streetarts" : "streetart") découvert sur \(missions.count)")
+                                .id(1)
+                            
+                            ForEach($missions){ $mission in
+                                MissionCard(cardIndex: getMissionNum(mission), artwork: $mission, selected: $selectedMission, discovered: $discovered)
+                            }
+                            
+                        }
+                    }
+                    .padding(24)
+                }
+                .onAppear{
+                    guard missions.isEmpty else { return }
+                    generateMissions()
+                }
+                .onChange(of: discovered) {
+                    if discovered != 0 && discovered == missions.count {
+                        showSuccess = true
+                        topOfList.scrollTo(1)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .background(Color.bgGray)
+                .scrollIndicators(.hidden)
+            }
+            .overlay(alignment: .center){
+                if showNoMissions == true {
+                    ContentUnavailableView("Pas de missions", systemImage: "photo.artframe", description: Text("Vous n'avez plus de Streetarts à découvrir").foregroundStyle(.secondText))
+                        .foregroundStyle(.secondOrange)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
-            .frame(maxWidth: .infinity)
-            .background(Color.bgGray)
-            .scrollIndicators(.hidden)
-        }
-        .overlay(alignment: .center){
-            if showNoMissions == true {
-                ContentUnavailableView("Pas de missions", systemImage: "photo.artframe", description: Text("Vous n'avez plus de Streetarts à découvrir").foregroundStyle(.secondText))
-                    .foregroundStyle(.secondOrange)
-                    .frame(width: .infinity, height: .infinity, alignment: .center)
-            }
-        }
-        .sheet(isPresented: $showSheet, onDismiss: { selectedMission = nil}) {
-            if let mission = selectedMission {
-                ArtworksDetailsView(artwork: mission)
-                    .presentationDetents([.fraction(1)])
-                    .presentationDragIndicator(.visible)
-            }
+            .alert("Mission terminée !", isPresented: $showSuccess, actions: {
+                
+                Button("Nouvelle mission", role: .close) {
+                    var i = 0
+                    
+                    for i in i..<artworks.count {
+                        
+                        if let sameArtwork = missions.first(where: { $0.id == artworks[i].id}){
+                            
+                            artworks[i].discovered = sameArtwork.discovered
+                        }
+                    }
+                    
+                    generateMissions()
+                }
+                
+            }, message: {
+                Text("Vous avez découvert tous les Streetarts proposés. On repart pour un tour ?")
+            })
         }
     }
 }

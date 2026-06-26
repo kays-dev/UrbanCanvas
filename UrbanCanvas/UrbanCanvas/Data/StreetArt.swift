@@ -51,7 +51,7 @@ enum ArtState : String, CaseIterable{
 }
 
 //Instances
-let artworks = [
+var artworks = [
     StreetArt(name: "La Joconde de Marseille", picture: "joconde", detail: """
         Dans le cadre de l’exposition « La Joconde, exposition immersive » au Palais de la Bourse à Marseille, coproduite par le Grand Palais Immersif et le Musée du Louvre, le MauMA : Musée des arts urbains de Marseille a donné « carte blanche » à l’artiste Kan / DMV pour la réalisation de l’œuvre « La Joconde de Marseille ». Produite et coordonnée par Méta 2, elle est la première représentation urbaine de la célèbre Monna Lisa au sein de la cité phocéenne.
         """, street: "Palais de la Bourse", postCode: "13001", city: "Marseille", lat: 43.2965, long: 5.3756, type: .harlftone, state: .good, author: kan.name, created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2022, month: 3)),
@@ -78,7 +78,7 @@ let artworks = [
         """, street: "Rue Beaubourg", postCode: "75004", city: "Paris", lat: 48.8604 , long: 2.3523, type: .invader, state: .fair, author: inv.name, created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2008, month: 9)),
     StreetArt(name: "Chuuuut...", picture: "shhh", detail: """
         Œuvre monumentale réalisée en 2011 par Jef Aérosol (Jean-François Perroy) sur la place Igor Stravinsky, face au Centre Pompidou. Cet autoportrait de 22 mètres de haut représente l'artiste l'index sur les lèvres, invitant les passants à s'arrêter et à écouter la ville. Réalisée en cinq jours avec 200 bombes aérosol.
-        """, street: "Place Igor Stravinsky", postCode: "75004", city: "Paris", lat: 48.8594 , long: 48.8594, type: .stencil, state: .perfect, author: aerosol.name, created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2011, month: 9)),
+        """, street: "Place Igor Stravinsky", postCode: "75004", city: "Paris", lat: 48.8594 , long: 2.35, type: .stencil, state: .perfect, author: aerosol.name, created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2011, month: 9)),
     StreetArt(name: "Le Tigre et la Cigale", picture: "tigre", detail: """
         Fresque murale réalisée par Satr (Deng Cunxin) sur un mur de la Friche la Belle de Mai. Un tigre de Sibérie se repose sous un pin tandis qu'une cigale provençale vole au-dessus de lui, dialogue poétique entre l'Orient et la Méditerranée. Peinte à la bombe aérosol lors d'une résidence artistique.
         """, street: "Friche la Belle de Mai, 41 Rue Jobin", postCode: "13003", city: "Marseille", lat: 43.3073, long: 5.3882, type: .mural, state: .good, author: satr.name, created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2022, month: 8))

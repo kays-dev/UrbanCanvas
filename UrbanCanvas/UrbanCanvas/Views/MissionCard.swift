@@ -12,6 +12,7 @@ struct MissionCard: View {
     
     @Binding var  artwork : StreetArt
     @Binding var  selected : StreetArt?
+    @Binding var  discovered : Int
     
     var body: some View {
         VStack(spacing: 16){
@@ -20,8 +21,8 @@ struct MissionCard: View {
                 
                 Text(artwork.name)
                 
-                Button{
-                    selected = artwork
+                NavigationLink{
+                    ArtworksDetailsView(artwork: artwork)
                 } label : {
                     Image(systemName: "arrow.up.right")
                         .foregroundStyle(.white)
@@ -42,6 +43,7 @@ struct MissionCard: View {
             
             Button{
                 artwork.discovered = true
+                discovered += 1
             } label : {
                 Label(!artwork.discovered ? "Non découvert" : "Découvert", systemImage: !artwork.discovered ? "seal" : "checkmark.seal.fill")
                     .foregroundStyle(!artwork.discovered ? .secondText : .white)
@@ -52,6 +54,7 @@ struct MissionCard: View {
             }
             .contentShape(.capsule)
             .glassEffect(.regular.tint(!artwork.discovered ? .white : .secondOrange), in : .rect(cornerRadius: 28.0))
+            .disabled(!artwork.discovered ? false : true)
             
             Image(artwork.picture)
                 .resizable()
@@ -97,10 +100,14 @@ struct MissionCard: View {
                     .glassEffect(in : .rect(cornerRadius: 24))
                     .padding()
                 }
+                .allowsHitTesting(false)
         }
         .background{
             RoundedRectangle(cornerRadius: 28)
                 .fill(.white)
+        }
+        .onChange(of: artwork.discovered) {
+            print("\(artwork.name) découvert")
         }
         
     }
@@ -111,9 +118,10 @@ struct MissionCard: View {
         var index = 0
         @State private var artwork : StreetArt = artworks[0]
         @State private var selected : StreetArt? = artworks[0]
+        @State private var discovered : Int = 0
         
         var body : some View {
-            MissionCard(cardIndex: index, artwork: $artwork, selected: $selected)
+            MissionCard(cardIndex: index, artwork: $artwork, selected: $selected, discovered: $discovered)
         }
     }
     
