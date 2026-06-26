@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AuthorsGridView: View {
+struct AuthorsView: View {
     let columns = [GridItem(.flexible(), spacing: 16), GridItem(.flexible())]
     
     let authorList : [Author] = authors.sorted{ $0.name < $1.name }
@@ -27,5 +27,5 @@ struct AuthorsGridView: View {
 }
 
 #Preview {
-    AuthorsGridView()
+    AuthorsView()
 }

@@ -1,5 +1,5 @@
 //
-//  ArtworksCardView.swift
+//  ArtworksCard.swift
 //  UrbanCanvas
 //
 //  Created by Apprenant174 on 22/06/2026.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ArtworksCardView: View {
+struct ArtworksCard: View {
     let artwork: StreetArt
     
     var body: some View {
@@ -42,5 +42,5 @@ struct ArtworksCardView: View {
 }
 
 #Preview {
-    ArtworksCardView(artwork: artworks[0])
+    ArtworksCard(artwork: artworks[0])
 }

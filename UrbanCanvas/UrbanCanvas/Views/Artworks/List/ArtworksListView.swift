@@ -16,7 +16,7 @@ struct ArtworksListView: View {
         VStack(alignment: .leading, spacing: 24){
             List(filteredList){ artwork in
                 NavigationLink(value: artwork) {
-                    ArtworksCardView(artwork: artwork)
+                    ArtworksCard(artwork: artwork)
                 }
             }
             .navigationDestination(for: StreetArt.self){ artwork in
