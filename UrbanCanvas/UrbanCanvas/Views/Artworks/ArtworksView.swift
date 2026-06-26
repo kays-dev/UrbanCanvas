@@ -46,8 +46,10 @@ struct ArtworksView: View {
                     .confirmationDialog("Liste des filtres", isPresented: $showDialog, titleVisibility: .visible) {
                         ForEach(ArtType.allCases, id : \.self){ type in
                             Button("\(type.rawValue)", role : selectedType == type ? .destructive : .confirm){
-                                selectedType = type
-                                filterArtworks()
+                                withAnimation {
+                                    selectedType = type
+                                    filterArtworks()
+                                }
                             }
                         }
                     } message : {

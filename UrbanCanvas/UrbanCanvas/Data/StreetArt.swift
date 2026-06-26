@@ -35,7 +35,6 @@ struct StreetArt : Identifiable, Hashable{
 enum ArtType : String, CaseIterable{
     case all = "Tous"
     case harlftone = "Harlftone"
-    case invader = "Invader"
     case mosaic = "Mosaïque"
     case mural = "Mural"
     case stencil = "Stencil"
@@ -75,7 +74,7 @@ var artworks = [
         """, street: "190 Rue Nationale", postCode: "75013", city: "Paris", lat: 48.8336 , long: 2.3626, type: .calligraphy, state: .good, author: obey.name, created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2016, month: 1)),
     StreetArt(name: "PA_278", picture: "pa", detail: """
         Mosaïque en carreaux de céramique colorés du street artiste Invader (Franck Slama), portant le numéro 278 de sa série parisienne. Inspirée des personnages pixelisés du jeu d'arcade Space Invaders (1978), cette pièce s'intègre discrètement au coin d'une façade du Marais.
-        """, street: "Rue Beaubourg", postCode: "75004", city: "Paris", lat: 48.8604 , long: 2.3523, type: .invader, state: .fair, author: inv.name, created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2008, month: 9)),
+        """, street: "Rue Beaubourg", postCode: "75004", city: "Paris", lat: 48.8604 , long: 2.3523, type: .mosaic, state: .fair, author: inv.name, created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2008, month: 9)),
     StreetArt(name: "Chuuuut...", picture: "shhh", detail: """
         Œuvre monumentale réalisée en 2011 par Jef Aérosol (Jean-François Perroy) sur la place Igor Stravinsky, face au Centre Pompidou. Cet autoportrait de 22 mètres de haut représente l'artiste l'index sur les lèvres, invitant les passants à s'arrêter et à écouter la ville. Réalisée en cinq jours avec 200 bombes aérosol.
         """, street: "Place Igor Stravinsky", postCode: "75004", city: "Paris", lat: 48.8594 , long: 2.35, type: .stencil, state: .perfect, author: aerosol.name, created: DateComponents(calendar: .current, timeZone: .autoupdatingCurrent, year: 2011, month: 9)),

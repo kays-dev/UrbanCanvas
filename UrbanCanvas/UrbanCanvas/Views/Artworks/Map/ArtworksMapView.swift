@@ -11,8 +11,8 @@ import MapKit
 struct ArtworksMapView: View {
     @State private var position = MapCameraPosition.region(
         MKCoordinateRegion(
-            center: marseille.coordinates,
-            span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
+            center: CLLocationCoordinate2D(latitude: 46.2276, longitude: 2.2137),
+            span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
         )
     )
     
@@ -72,7 +72,9 @@ var body: some View {
         }
     }
     .onChange(of: filteredList) {
-        cameraPosition(filteredList)
+        withAnimation{
+            cameraPosition(filteredList)
+        }
     }
     .onChange(of: selectedMarker) { oldvalue, newvalue in
         if newvalue == nil {
