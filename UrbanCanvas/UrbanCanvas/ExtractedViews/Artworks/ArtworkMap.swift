@@ -14,12 +14,12 @@ struct ArtworkMap: View {
     @State private var position = MapCameraPosition.region(
         MKCoordinateRegion(
             center: CLLocationCoordinate2D(latitude: 46.2276, longitude: 2.2137),
-            span: MKCoordinateSpan(latitudeDelta: 10, longitudeDelta: 10)
+            span: MKCoordinateSpan(latitudeDelta: 1, longitudeDelta: 1)
         )
     )
     
     var body: some View {
-        Map(initialPosition: position){
+        Map(position: $position){
             Annotation(artwork.name, coordinate: CLLocationCoordinate2D(latitude: artwork.lat, longitude: artwork.long), anchor: .center ) {
                 Circle()
                     .stroke(.white, lineWidth: 2)
@@ -43,7 +43,7 @@ struct ArtworkMap: View {
             MapCameraPosition.region(
                 MKCoordinateRegion(
                     center: CLLocationCoordinate2D(latitude: artwork.lat, longitude: artwork.long),
-                    span: MKCoordinateSpan(latitudeDelta: 0.05, longitudeDelta: 0.05)
+                    span: MKCoordinateSpan(latitudeDelta: 0.008, longitudeDelta: 0.008)
                 )
             )
         }
