@@ -69,7 +69,10 @@ struct MissionsView: View {
                     VStack(spacing: 20){
                         
                         if missions.count != 0 {
-                            Text("\(discovered) \(discovered > 1 ? "streetarts" : "streetart") découvert sur \(missions.count)")
+                            Text("\(discovered) \(discovered > 1 ? "oeuvres" : "oeuvre") \(discovered > 1 ? "découvertes" : "découverte") sur \(missions.count)")
+                                .bold()
+                                .foregroundStyle(.accent)
+                                .padding(.bottom)
                                 .id(1)
                             
                             ForEach($missions){ $mission in
@@ -106,12 +109,14 @@ struct MissionsView: View {
                 Button("Nouvelle mission", role: .close) {
                     var i = 0
                     
-                    for i in i..<artworks.count {
+                    while i < artworks.count {
                         
                         if let sameArtwork = missions.first(where: { $0.id == artworks[i].id}){
                             
                             artworks[i].discovered = sameArtwork.discovered
                         }
+                        
+                        i += 1
                     }
                     
                     generateMissions()

@@ -75,20 +75,13 @@ struct AuthorCard: View {
             }
             .font(.footnote)
             
-            Button{
+            Button("Site web"){
                     if let authorLink = URL(string: author.link!) {
                         
                         openURL(authorLink, prefersInApp: true)
                     }
-            } label : {
-                Text("Site web")
-                    .padding(.vertical, 8)
-                    .font(.footnote)
-                    .foregroundStyle(.white)
-                    .bold()
-                    .frame(maxWidth: .infinity)
             }
-            .glassEffect(.regular.tint(.secondOrange), in : .rect(cornerRadius: 28.0))
+            .buttonStyle(ActionButton())
         }
         .frame(maxWidth: .infinity, alignment: .center)
         .frame(height: 240)

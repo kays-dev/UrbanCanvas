@@ -21,25 +21,17 @@ struct MissionCard: View {
                 
                 Text(artwork.name)
                 
-                NavigationLink{
-                    ArtworksDetailsView(artwork: artwork)
-                } label : {
-                    Image(systemName: "arrow.up.right")
-                        .foregroundStyle(.white)
-                        .font(.callout)
-                        .padding(8)
-                        .background{
-                            Circle()
-                        }
-                        .buttonStyle(.borderedProminent)
-                }
-                .contentShape(.circle)
-                
             }
             .font(.callout)
-            .bold()
-            .foregroundStyle(.secondOrange)
             .padding(.top)
+            
+            
+            NavigationLink("Consulter la fiche"){
+                ArtworksDetailsView(artwork: artwork)
+            }
+            .buttonStyle(ActionButton())
+            .frame(maxWidth: 180)
+            
             
             Button{
                 artwork.discovered = true
@@ -50,10 +42,10 @@ struct MissionCard: View {
                     .font(.caption)
                     .bold()
                     .padding(.vertical, 8)
-                    .padding(.horizontal, 24)
+                    .frame(maxWidth: 180)
             }
             .contentShape(.capsule)
-            .glassEffect(.regular.tint(!artwork.discovered ? .white : .secondOrange), in : .rect(cornerRadius: 28.0))
+            .glassEffect(.regular.tint(!artwork.discovered ? .white : .accent), in : .rect(cornerRadius: 28.0))
             .disabled(!artwork.discovered ? false : true)
             
             Image(artwork.picture)
@@ -66,7 +58,6 @@ struct MissionCard: View {
                 .clipShape(.rect(topLeadingRadius: 28, bottomLeadingRadius: 28, bottomTrailingRadius: 28, topTrailingRadius: 28))
                 .overlay{
                     RoundedRectangle(cornerRadius: 28)
-                        .fill(.white.opacity(0.4))
                         .stroke(.bgGray, lineWidth: 4)
                 }
                 .overlay(alignment: .bottom){
