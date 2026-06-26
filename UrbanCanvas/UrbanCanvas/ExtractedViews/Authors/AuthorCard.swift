@@ -13,9 +13,9 @@ struct AuthorCard: View {
     let author : Author
     
     var body: some View {
-        VStack(alignment: .center, spacing: 20){
-            if author.profile != "" {
-                Image(author.profile)
+        VStack(alignment: .center, spacing: 12){
+            if let image = author.profile {
+                Image(image)
                     .resizable()
                     .scaledToFill()
                     .frame(minWidth: 0,
@@ -76,37 +76,31 @@ struct AuthorCard: View {
             .font(.footnote)
             
             Button{
-                if let authorLink = URL(string: author.link!) {
-                    
-                    openURL(authorLink, prefersInApp: true)
-                }
-                    
-                } label : {
-                    Text("Site web")
-                        .padding(.vertical, 8)
-                        .frame(maxWidth: .infinity)
-                        .background{
-                            Capsule()
-                                .fill(.secondOrange)
-                        }
-                        .font(.footnote)
-                        .foregroundStyle(.white)
-                        .bold()
-                }
-                
-                
+                    if let authorLink = URL(string: author.link!) {
+                        
+                        openURL(authorLink, prefersInApp: true)
+                    }
+            } label : {
+                Text("Site web")
+                    .padding(.vertical, 8)
+                    .font(.footnote)
+                    .foregroundStyle(.white)
+                    .bold()
+                    .frame(maxWidth: .infinity)
             }
-            .frame(maxWidth: .infinity, alignment: .center)
-            .frame(height: 240)
-            .padding(.vertical, 12)
-            .padding(.horizontal, 16)
-            .background{
-                RoundedRectangle(cornerRadius: 28)
-                    .fill(.white)
-            }
+            .glassEffect(.regular.tint(.secondOrange), in : .rect(cornerRadius: 28.0))
+        }
+        .frame(maxWidth: .infinity, alignment: .center)
+        .frame(height: 240)
+        .padding(.vertical, 12)
+        .padding(.horizontal, 16)
+        .background{
+            RoundedRectangle(cornerRadius: 24)
+                .fill(.white)
         }
     }
-    
-    #Preview {
-        AuthorCard(author: authors[0])
-    }
+}
+
+#Preview {
+    AuthorCard(author: authors[0])
+}

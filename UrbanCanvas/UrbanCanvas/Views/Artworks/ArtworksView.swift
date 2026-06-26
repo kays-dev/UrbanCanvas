@@ -76,7 +76,7 @@ struct ArtworksView: View {
                     .frame(width: 300)
                     .fixedSize()
                 }
-            }            
+            }
         }
     }
 }

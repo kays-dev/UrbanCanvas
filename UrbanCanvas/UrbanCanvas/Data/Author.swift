@@ -12,7 +12,7 @@ struct Author :  Identifiable, Hashable {
     let id = UUID()
     
     let name : String
-    var profile : String = ""
+    var profile : String?
     
     var age : String = "NC"
     let origin : String

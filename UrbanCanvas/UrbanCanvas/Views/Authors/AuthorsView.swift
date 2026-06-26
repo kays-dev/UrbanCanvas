@@ -14,12 +14,13 @@ struct AuthorsView: View {
     
     var body: some View {
         ScrollView{
-            LazyVGrid(columns: columns) {
+            LazyVGrid(columns: columns, spacing: 16) {
                 ForEach(authorList){ author in
                     AuthorCard(author: author)
                 }
             }
             .padding(.horizontal, 24)
+            .padding(.top, 24)
         }
         .background(Color.bgGray.ignoresSafeArea())
         .scrollIndicators(.hidden)

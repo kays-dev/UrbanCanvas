@@ -13,7 +13,7 @@ struct ArtworksDetailsView: View {
     
     func getToDateFormat(dateComp: DateComponents) -> String? {
         let thisDate = Calendar.current.date(from: dateComp)
-
+        
         var newDate = " "
         
         if let formatting = thisDate?.formatted(Date.FormatStyle().month(.abbreviated)){

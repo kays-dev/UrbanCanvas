@@ -54,44 +54,44 @@ struct ArtworksMapView: View {
                 }
             }
         } else {
-                position =
-                MapCameraPosition.region(
-                    MKCoordinateRegion(
-                        center: CLLocationCoordinate2D(latitude: list[0].lat, longitude: list[0].long),
-                        span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)))
-        }
-}
-
-var body: some View {
-    Map(position: $position, selection: $selectedMarker){
-        ForEach(filteredList){ artwork in
-            
-            Marker(artwork.name, systemImage: "mappin", coordinate: CLLocationCoordinate2D(latitude: artwork.lat, longitude: artwork.long))
-                .tint(.secondOrange)
-                .tag(artwork)
+            position =
+            MapCameraPosition.region(
+                MKCoordinateRegion(
+                    center: CLLocationCoordinate2D(latitude: list[0].lat, longitude: list[0].long),
+                    span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)))
         }
     }
-    .onChange(of: filteredList) {
-        withAnimation{
-            cameraPosition(filteredList)
+    
+    var body: some View {
+        Map(position: $position, selection: $selectedMarker){
+            ForEach(filteredList){ artwork in
+                
+                Marker(artwork.name, systemImage: "mappin", coordinate: CLLocationCoordinate2D(latitude: artwork.lat, longitude: artwork.long))
+                    .tint(.secondOrange)
+                    .tag(artwork)
+            }
+        }
+        .onChange(of: filteredList) {
+            withAnimation{
+                cameraPosition(filteredList)
+            }
+        }
+        .onChange(of: selectedMarker) { oldvalue, newvalue in
+            if newvalue == nil {
+                showSheet = false
+            } else {
+                showSheet = true
+            }
+        }
+        .sheet(isPresented: $showSheet, onDismiss: { selectedMarker = nil}) {
+            if let artwork = selectedMarker {
+                ArtworkMapPreview(artwork: artwork)
+                    .presentationDetents([
+                        .fraction(0.4), .fraction(1)])
+                    .presentationDragIndicator(.automatic)
+            }
         }
     }
-    .onChange(of: selectedMarker) { oldvalue, newvalue in
-        if newvalue == nil {
-            showSheet = false
-        } else {
-            showSheet = true
-        }
-    }
-    .sheet(isPresented: $showSheet, onDismiss: { selectedMarker = nil}) {
-        if let artwork = selectedMarker {
-            ArtworkMapPreview(artwork: artwork)
-                .presentationDetents([
-                    .fraction(0.4), .fraction(1)])
-                .presentationDragIndicator(.automatic)
-        }
-    }
-}
 }
 
 #Preview {
