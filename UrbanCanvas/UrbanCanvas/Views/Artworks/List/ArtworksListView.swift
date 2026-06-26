@@ -22,13 +22,13 @@ struct ArtworksListView: View {
             .navigationDestination(for: StreetArt.self){ artwork in
                 ArtworksDetailsView(artwork: artwork)
             }
-            .listStyle(.plain)
+            .padding(.horizontal, -16)
+            .listStyle(.automatic)
             .scrollIndicators(.hidden)
-            .mask(RoundedRectangle(cornerRadius: 28))
-            
+            .mask(RoundedRectangle(cornerRadius: 24))
         }
-        .padding(.horizontal, 24)
         .padding(.vertical, 20)
+        .padding(.horizontal, 20)
     }
 }
 
