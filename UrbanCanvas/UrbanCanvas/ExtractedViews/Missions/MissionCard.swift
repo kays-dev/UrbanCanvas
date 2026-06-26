@@ -97,10 +97,6 @@ struct MissionCard: View {
             RoundedRectangle(cornerRadius: 28)
                 .fill(.white)
         }
-        .onChange(of: artwork.discovered) {
-            print("\(artwork.name) découvert")
-        }
-        
     }
 }
 
