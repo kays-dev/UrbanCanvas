@@ -68,6 +68,6 @@ git clone https://github.com/ton-username/UrbanCanvas.git
 
 ---
 
-## Auteur
+## 👥 AUTEURE
 
-Développé par **kays-dev** dans le cadre de la formation **AFP Advanced — Simplon**, juin 2026.
+Développé par **Krystal** ([@kays-dev](https://github.com/kays-dev)) dans le cadre de l'Advanced Apple Foundation Program — SIMPLON.CO, juin 2026.
