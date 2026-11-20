@@ -60,7 +60,7 @@ UrbanCanvas permet d'explorer un catalogue d'œuvres de street art à travers la
 
 1. Cloner le dépôt
 ```bash
-git clone https://github.com/ton-username/UrbanCanvas.git
+git clone https://github.com/kays-dev/UrbanCanvas.git
 ```
 2. Ouvrir `UrbanCanvas.xcodeproj` dans Xcode 16+
 3. Sélectionner un simulateur iOS 26+ ou un device physique
